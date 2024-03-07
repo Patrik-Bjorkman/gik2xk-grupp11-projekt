@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 	return sequelize.define(
-		"user",
+		'user',
 		{
 			id: {
 				type: DataTypes.INTEGER,
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 				unique: true,
 				allowNull: false,
 				validate: {
-					len: [3, 200],
+					len: [4, 200],
 				},
 			},
 			password: {
