@@ -22,6 +22,10 @@ router.get('/', (req, res) => {
 	});
 });
 
+router.get('/:id', (req, res) => {});
+
+router.get('/:id/getCarts', (req, res) => {});
+
 router.post('/', (req, res) => {
 	const user = req.body;
 	const invalidData = validate(user, constraints);
