@@ -22,7 +22,11 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.get('/:id', (req, res) => {});
+router.get('/:id', (req, res) => {
+	db.user.findByPk(req.params.id).then((result) => {
+		res.send(result);
+	});
+});
 
 router.get('/:id/getCarts', (req, res) => {});
 
