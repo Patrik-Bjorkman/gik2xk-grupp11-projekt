@@ -5,6 +5,7 @@ const {
 	createResponseError,
 	createResponseMessage,
 } = require('../helpers/responseHelper');
+const { where } = require('sequelize');
 const constraints = {
 	title: {
 		length: {
@@ -15,6 +16,12 @@ const constraints = {
 	imageUrl: {
 		url: {
 			message: '^Sökvägen är felaktig.',
+		},
+	},
+	rating: {
+		length: {
+			maximum: 1,
+			tooLong: '^Betyget får inte vara längre än %{count} tecken lång.',
 		},
 	},
 };
@@ -39,6 +46,30 @@ async function getAll() {
 	}
 }
 
+async function getAllRatings() {
+	try {
+		const allRatings = await db.rating.findAll({
+			// include: [db.product],
+		});
+		return createResponseSuccess(allRatings);
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
+async function getProductRatings(id) {
+	try {
+		const ratings = await db.rating.findAll({
+			where: {
+				productId: id,
+			},
+		});
+		return createResponseSuccess(ratings);
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
 async function create(product) {
 	const invalidData = validate(product, constraints);
 
@@ -48,6 +79,20 @@ async function create(product) {
 	try {
 		const newProduct = await db.product.create(product);
 		return createResponseSuccess(newProduct);
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
+async function addRating(rating) {
+	const invalidData = validate(rating, constraints);
+
+	if (invalidData) {
+		return createResponseError(422, invalidData);
+	}
+	try {
+		const newRating = await db.rating.create(rating);
+		return createResponseSuccess(newRating);
 	} catch (error) {
 		return createResponseError(error.status, error.message);
 	}
@@ -68,6 +113,50 @@ async function update(product, id) {
 			},
 		});
 		return createResponseMessage(200, 'Produkten uppdaterades');
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
+async function updateRating(id, productId, rating, comment) {
+	const invalidData = validate(rating, constraints);
+	if (!id) {
+		return createResponseError(422, 'Id är obligatoriskt');
+	}
+	if (invalidData) {
+		return createResponseError(422, invalidData);
+	}
+	try {
+		await db.rating.update(rating, {
+			where: {
+				id,
+				productId,
+			},
+		});
+		return createResponseMessage(200, 'Betygsättningen uppdaterades');
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
+async function destroyRating(ratingId, productId) {
+	if (!productId) {
+		return createResponseError(422, 'ProduktId är obligatoriskt');
+	}
+	if (!ratingId) {
+		return createResponseError(422, 'BetygsättningId är obligatoriskt');
+	}
+	try {
+		await db.rating.destroy({
+			where: {
+				ratingId,
+				productId,
+			},
+		});
+		return createResponseMessage(
+			200,
+			`Betygsättning med id:${ratingId} raderades`
+		);
 	} catch (error) {
 		return createResponseError(error.status, error.message);
 	}
@@ -103,8 +192,13 @@ async function destroy(id) {
 module.exports = {
 	getById,
 	getAll,
+	getProductRatings,
+	getAllRatings,
 	create,
+	addRating,
 	update,
+	updateRating,
+	destroyRating,
 	destroy,
 	// addToCart,
 };

@@ -116,6 +116,34 @@ async function update(cart, id) {
 	}
 }
 
+async function updateCartRow(cartId, productId, amount) {
+	if (!cartId) {
+		return createResponseError(422, 'VarukorgsId är obligatoriskt');
+	}
+	if (!productId) {
+		return createResponseError(422, 'ProduktId är obligatoriskt');
+	}
+	if (!amount) {
+		return createResponseError(422, 'Antal är obligatoriskt');
+	}
+	try {
+		const cartRow = await db.cartRow.findOne({
+			where: {
+				cartId,
+				productId,
+			},
+		});
+		if (!cartRow) {
+			return createResponseError(404, 'Varukorgsraden hittades inte');
+		}
+		cartRow.amount = amount;
+		await cartRow.save();
+		return createResponseSuccess(cartRow);
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
 async function destroyCartRow(cartId, productId) {
 	if (!cartId) {
 		return createResponseError(422, 'VarukorgsId är obligatoriskt');
@@ -159,6 +187,7 @@ module.exports = {
 	create,
 	addProduct,
 	update,
+	updateCartRow,
 	destroyCartRow,
 	destroy,
 };

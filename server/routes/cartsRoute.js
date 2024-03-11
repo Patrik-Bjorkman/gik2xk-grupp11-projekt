@@ -46,6 +46,15 @@ router.put('/:id', (req, res) => {
 	});
 });
 
+router.put('/:id/updateCartRow', (req, res) => {
+	const id = req.params.id;
+	const productId = req.body.productId;
+	const amount = req.body.amount;
+	cartService.updateCartRow(id, productId, amount).then((result) => {
+		res.status(result.status).json(result.data);
+	});
+});
+
 router.delete('/:id/destroyCartRow', (req, res) => {
 	const id = req.params.id;
 	const productId = req.body.productId;

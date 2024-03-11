@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 	return sequelize.define(
-		"rating",
+		'rating',
 		{
 			id: {
 				type: DataTypes.INTEGER,
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 				primaryKey: true,
 			},
 			rating: {
-				type: DataTypes.DECIMAL(1, 1),
+				type: DataTypes.INTEGER(1),
 				allowNull: false,
 			},
 			comment: DataTypes.TEXT(),

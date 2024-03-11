@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const db = require('../models');
 const validate = require('validate.js');
+const userService = require('../services/userService');
 
 const constraints = {
 	email: {
@@ -17,8 +18,8 @@ const constraints = {
 };
 
 router.get('/', (req, res) => {
-	db.user.findAll().then((result) => {
-		res.send(result);
+	userService.getAll().then((result) => {
+		res.status(result.status).json(result.data);
 	});
 });
 
