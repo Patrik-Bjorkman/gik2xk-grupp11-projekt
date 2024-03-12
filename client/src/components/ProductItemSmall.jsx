@@ -1,11 +1,5 @@
-import {
-	Link,
-	Typography,
-	Card,
-	CardMedia,
-	CardContent,
-	Box,
-} from '@mui/material';
+import { Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 import placeholderImage from '../assets/placeholder.png';
 import Ranking from './Ranking';
 
@@ -13,13 +7,15 @@ function ProductItemSmall({ product }) {
 	return (
 		<>
 			<Card variant='outlined' sx={{ mb: 4 }}>
-				<CardMedia
-					component='img'
-					image={product.imageUrl || placeholderImage}
-					alt={product.title}
-					sx={{ maxWidth: '50%' }}
-				/>
-				<Link to={`/posts/${product.id}`}>
+				<Link to={`/products/${product.id}`}>
+					<CardMedia
+						component='img'
+						image={product.imageUrl || placeholderImage}
+						alt={product.title}
+						sx={{ maxWidth: '50%' }}
+					/>
+				</Link>
+				<Link to={`/products/${product.id}`}>
 					<h3>{product.title}</h3>
 				</Link>
 				<CardContent>
