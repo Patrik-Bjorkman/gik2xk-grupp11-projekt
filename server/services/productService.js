@@ -5,7 +5,6 @@ const {
 	createResponseError,
 	createResponseMessage,
 } = require('../helpers/responseHelper');
-const { where } = require('sequelize');
 const constraints = {
 	title: {
 		length: {
@@ -48,9 +47,7 @@ async function getAll() {
 
 async function getAllRatings() {
 	try {
-		const allRatings = await db.rating.findAll({
-			// include: [db.product],
-		});
+		const allRatings = await db.rating.findAll({});
 		return createResponseSuccess(allRatings);
 	} catch (error) {
 		return createResponseError(error.status, error.message);
@@ -118,30 +115,6 @@ async function update(product, id) {
 	}
 }
 
-// async function updateRating(id, productId, rating, comment) {
-// 	const invalidData = validate(rating, constraints);
-// 	if (!id) {
-// 		return createResponseError(422, 'Id är obligatoriskt');
-// 	}
-// 	if (invalidData) {
-// 		return createResponseError(422, invalidData);
-// 	}
-// 	try {
-// 		await db.rating.update(
-// 			{ rating: rating, comment: comment },
-// 			{
-// 				where: {
-// 					id,
-// 					productId,
-// 				},
-// 			}
-// 		);
-// 		return createResponseMessage(200, 'Betygsättningen uppdaterades');
-// 	} catch (error) {
-// 		return createResponseError(error.status, error.message);
-// 	}
-// }
-
 async function updateRating(id, productId, rating, comment) {
 	const ratingData = { rating, comment };
 	const invalidData = validate(ratingData, constraints);
@@ -172,24 +145,21 @@ async function updateRating(id, productId, rating, comment) {
 	}
 }
 
-async function destroyRating(ratingId, productId) {
+async function destroyRating(id, productId) {
 	if (!productId) {
 		return createResponseError(422, 'ProduktId är obligatoriskt');
 	}
-	if (!ratingId) {
+	if (!id) {
 		return createResponseError(422, 'BetygsättningId är obligatoriskt');
 	}
 	try {
 		await db.rating.destroy({
 			where: {
-				ratingId,
+				id,
 				productId,
 			},
 		});
-		return createResponseMessage(
-			200,
-			`Betygsättning med id:${ratingId} raderades`
-		);
+		return createResponseMessage(200, `Betygsättning med id:${id} raderades`);
 	} catch (error) {
 		return createResponseError(error.status, error.message);
 	}
