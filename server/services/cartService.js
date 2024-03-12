@@ -70,7 +70,7 @@ async function addProduct(cartId, userId, productId, amount) {
 			// Se till att amount är ett tal
 			const newAmount = parseInt(amount, 10);
 			const newCartRow = await db.cartRow.create({
-				cartId: cart.id, // Använd cart.id här om cart är objektet du vill ha id från
+				cartId: cartId,
 				productId: productId,
 				amount: newAmount,
 			});

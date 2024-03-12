@@ -30,10 +30,10 @@ router.post('/', (req, res) => {
 
 router.post('/:id/addProduct', (req, res) => {
 	const productId = req.body.productId;
-	const id = req.params.id;
+	const cartId = req.params.id;
 	const userId = req.body.userId;
 	const amount = req.body.amount;
-	cartService.addProduct(id, userId, productId, amount).then((result) => {
+	cartService.addProduct(cartId, userId, productId, amount).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });

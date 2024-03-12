@@ -211,17 +211,6 @@ async function destroy(id) {
 	}
 }
 
-// async function addToCart(product, id) {
-// 	try {
-// 		const product = await db.product.findByPk(id);
-// 		const cart = await db.cart.findByPk(product.cartId);
-// 		cart.addProduct(product);
-// 		return createResponseSuccess(product);
-// 	} catch (error) {
-// 		return createResponseError(error.status, error.message);
-// 	}
-// }
-
 module.exports = {
 	getById,
 	getAll,
