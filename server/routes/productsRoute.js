@@ -55,10 +55,8 @@ router.put('/', (req, res) => {
 
 router.put('/:id/updateRating', (req, res) => {
 	const productId = req.params.id;
-	const id = req.body.id;
-	const rating = req.body.rating;
-	const comment = req.body.comment;
-	productService.updateRating(productId, id, rating, comment).then((result) => {
+	const { id, rating, comment } = req.body;
+	productService.updateRating(id, productId, rating, comment).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });

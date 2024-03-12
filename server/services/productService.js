@@ -118,8 +118,34 @@ async function update(product, id) {
 	}
 }
 
+// async function updateRating(id, productId, rating, comment) {
+// 	const invalidData = validate(rating, constraints);
+// 	if (!id) {
+// 		return createResponseError(422, 'Id är obligatoriskt');
+// 	}
+// 	if (invalidData) {
+// 		return createResponseError(422, invalidData);
+// 	}
+// 	try {
+// 		await db.rating.update(
+// 			{ rating: rating, comment: comment },
+// 			{
+// 				where: {
+// 					id,
+// 					productId,
+// 				},
+// 			}
+// 		);
+// 		return createResponseMessage(200, 'Betygsättningen uppdaterades');
+// 	} catch (error) {
+// 		return createResponseError(error.status, error.message);
+// 	}
+// }
+
 async function updateRating(id, productId, rating, comment) {
-	const invalidData = validate(rating, constraints);
+	const ratingData = { rating, comment };
+	const invalidData = validate(ratingData, constraints);
+
 	if (!id) {
 		return createResponseError(422, 'Id är obligatoriskt');
 	}
@@ -127,13 +153,20 @@ async function updateRating(id, productId, rating, comment) {
 		return createResponseError(422, invalidData);
 	}
 	try {
-		await db.rating.update(rating, {
+		const [affectedRows] = await db.rating.update(ratingData, {
 			where: {
 				id,
 				productId,
 			},
 		});
-		return createResponseMessage(200, 'Betygsättningen uppdaterades');
+		if (affectedRows > 0) {
+			return createResponseMessage(200, 'Betygsättningen uppdaterades');
+		} else {
+			return createResponseError(
+				404,
+				'Ingen betygsättning hittades med angivet id'
+			);
+		}
 	} catch (error) {
 		return createResponseError(error.status, error.message);
 	}
