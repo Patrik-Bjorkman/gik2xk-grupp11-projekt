@@ -1,7 +1,8 @@
 import { Typography, Rating } from '@mui/material';
 import AverageRatingList from './AverageRatingList';
-function AverageRating({ productId }) {
-	const averageRating = AverageRatingList(productId);
+
+function AverageRating({ productId, refreshTrigger }) {
+	const averageRating = AverageRatingList(productId, refreshTrigger);
 
 	return (
 		<>

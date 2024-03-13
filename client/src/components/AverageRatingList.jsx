@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllRatings } from '../services/ProductServ';
 
-function AverageRatingList(productId) {
+function AverageRatingList(productId, refreshTrigger) {
 	const [averageRating, setAverageRating] = useState(0);
 
 	useEffect(() => {
@@ -14,7 +14,7 @@ function AverageRatingList(productId) {
 				productRatings.length;
 			setAverageRating(average || 0); // Set to 0 if no ratings
 		});
-	}, [productId]);
+	}, [productId, refreshTrigger]);
 
 	return averageRating;
 }

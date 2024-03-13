@@ -14,7 +14,7 @@ function App() {
 							<Link to='/products/new'>Skapa Produkt</Link>
 						</Button>
 						<Button color='inherit' variant='contained'>
-							<Link to='/carts/new'>Kundvagn</Link>
+							<Link to='/carts/1'>Kundvagn</Link>
 						</Button>
 					</Toolbar>
 				</AppBar>

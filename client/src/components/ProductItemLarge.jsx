@@ -42,7 +42,10 @@ function ProductItemLarge({ product }) {
 				<Typography>{product.description}</Typography>
 				<Typography>{product.price} kr</Typography>
 				<Box sx={{ mt: 2, mb: 2 }}>
-					<AverageRating productId={product.id} />
+					<AverageRating
+						productId={product.id}
+						refreshTrigger={refreshRating}
+					/>
 				</Box>
 				<Box sx={{ mt: 2, mb: 2 }}>
 					<Button

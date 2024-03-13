@@ -11,7 +11,7 @@ export async function getAll(endpoint = '/products') {
 			return [];
 		}
 	} catch (e) {
-		e?.reponse ? console.log(e.response.data) : console.log(e);
+		e?.response ? console.log(e.response.data) : console.log(e);
 	}
 }
 
@@ -26,7 +26,7 @@ export async function getProduct(id) {
 			return {};
 		}
 	} catch (e) {
-		e?.reponse ? console.log(e.response.data) : console.log(e);
+		e?.response ? console.log(e.response.data) : console.log(e);
 	}
 }
 
@@ -41,7 +41,7 @@ export async function getAllRatings() {
 			return [];
 		}
 	} catch (e) {
-		e?.reponse ? console.log(e.response.data) : console.log(e);
+		e?.response ? console.log(e.response.data) : console.log(e);
 	}
 }
 
@@ -58,7 +58,45 @@ export async function getProductRatings(productId) {
 			return {};
 		}
 	} catch (e) {
-		e?.reponse ? console.log(e.response.data) : console.log(e);
+		e?.response ? console.log(e.response.data) : console.log(e);
+	}
+}
+export async function create(product) {
+	try {
+		const response = await axios.post('/products', product);
+		if (response.status === 200) return response.data;
+		else {
+			console.log(response.data);
+			return null;
+		}
+	} catch (e) {
+		e?.response ? console.log(e.response.data) : console.log(e);
+	}
+}
+
+export async function update(product) {
+	try {
+		const response = await axios.put('/products', product);
+		if (response.status === 200) return response.data;
+		else {
+			console.log(response.data);
+			return null;
+		}
+	} catch (e) {
+		e?.response ? console.log(e.response.data) : console.log(e);
+	}
+}
+
+export async function remove(id) {
+	try {
+		const response = await axios.delete('/products', { data: { id } });
+		if (response.status === 200) return response.data;
+		else {
+			console.log(response.data);
+			return null;
+		}
+	} catch (e) {
+		e?.response ? console.log(e.response.data) : console.log(e);
 	}
 }
 
