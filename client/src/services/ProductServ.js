@@ -44,3 +44,38 @@ export async function getAllRatings() {
 		e?.reponse ? console.log(e.response.data) : console.log(e);
 	}
 }
+
+export async function getProductRatings(productId) {
+	try {
+		const response = await axios.get(
+			`/products/${productId}/getProductRatings/`
+		);
+
+		if (response.status === 200) {
+			return response.data;
+		} else {
+			console.log(response);
+			return {};
+		}
+	} catch (e) {
+		e?.reponse ? console.log(e.response.data) : console.log(e);
+	}
+}
+
+export async function addRating(productId, rating) {
+	try {
+		const response = await axios.post(
+			`/products/${productId}/addRating`,
+			rating
+		);
+
+		if (response.status === 201) {
+			return response.data;
+		} else {
+			console.log(response);
+			return {};
+		}
+	} catch (e) {
+		console.error('Error in addRating:', e?.response ? e.response.data : e);
+	}
+}

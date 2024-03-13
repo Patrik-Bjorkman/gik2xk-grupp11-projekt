@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 				primaryKey: true,
 			},
 			rating: {
-				type: DataTypes.INTEGER(1),
+				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
 			comment: DataTypes.TEXT(),

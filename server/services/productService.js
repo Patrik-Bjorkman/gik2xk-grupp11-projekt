@@ -82,7 +82,7 @@ async function create(product) {
 }
 
 async function addRating(rating) {
-	const invalidData = validate(rating, constraints);
+	const invalidData = validate(rating);
 
 	if (invalidData) {
 		return createResponseError(422, invalidData);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllRatings } from '../services/ProductServ';
 
-function RatingList(productId) {
+function AverageRatingList(productId) {
 	const [averageRating, setAverageRating] = useState(0);
 
 	useEffect(() => {
@@ -19,4 +19,4 @@ function RatingList(productId) {
 	return averageRating;
 }
 
-export default RatingList;
+export default AverageRatingList;

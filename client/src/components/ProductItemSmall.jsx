@@ -1,7 +1,7 @@
 import { Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import placeholderImage from '../assets/placeholder.png';
-import Ranking from './Ranking';
+import AverageRating from './AverageRating';
 
 function ProductItemSmall({ product }) {
 	return (
@@ -22,7 +22,7 @@ function ProductItemSmall({ product }) {
 					<Typography>{product.price} kr</Typography>
 					<Typography>{product.description}</Typography>
 					<Box sx={{ mt: 2, mb: 2 }}>
-						<Ranking productId={product.id} />
+						<AverageRating productId={product.id} />
 					</Box>
 				</CardContent>
 			</Card>
