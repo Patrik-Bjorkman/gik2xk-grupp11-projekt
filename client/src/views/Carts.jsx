@@ -1,4 +1,4 @@
-import getCart from '../services/CartService';
+//import getCart from '../services/CartService';
 import { useEffect } from 'react';
 
 function Carts() {

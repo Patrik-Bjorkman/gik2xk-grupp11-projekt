@@ -10,10 +10,10 @@ function App() {
 						<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
 							<Link to='/'>Webbshop</Link>
 						</Typography>
-						<Button color='inherit'>
+						<Button color='inherit' variant="contained">
 							<Link to='/products/new'>Skapa Produkt</Link>
 						</Button>
-						<Button color='inherit' variant='contained'>
+						<Button sx={{ m: 2 }} color='inherit' variant='contained'>
 							<Link to='/carts/1'>Kundvagn</Link>
 						</Button>
 					</Toolbar>
