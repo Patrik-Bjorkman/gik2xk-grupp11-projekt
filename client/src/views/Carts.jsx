@@ -14,23 +14,16 @@ function Carts() {
 	}, [userId]);
 
 	const handleReduceAmount = async (userId, productId) => {
-		try {
-			const response = await reduceAmount(userId, productId);
-			// If successful, re-fetch the cart data to update the state
-			if (response.status === 200) {
-				const updatedCart = await getCart(userId);
-				setCart(updatedCart);
-			} else {
-				console.log('Misslyckades att minska antalet:', response);
-			}
-		} catch (error) {
-			console.error('Error i handleReduceAmount:', error);
-		}
+		await reduceAmount(userId, productId);
+		console.log('userId:', userId, 'productId:', productId);
+		const updatedCart = await getCart(userId);
+		setCart(updatedCart);
 	};
 
 	const handleIncreaseAmount = async (userId, productId) => {
 		await increaseAmount(userId, productId);
 		const updatedCart = await getCart(userId);
+		console.log('userId:', userId, 'productId:', productId);
 		setCart(updatedCart);
 	};
 

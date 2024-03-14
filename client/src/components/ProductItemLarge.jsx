@@ -36,7 +36,7 @@ function ProductItemLarge({ product }) {
 				<CardMedia
 					component='img'
 					alt={product.title}
-					height='500'
+					sx={{ maxWidth: '40%' }}
 					image={product.imageUrl || placeholderImage}
 				/>
 				<Typography>{product.description}</Typography>

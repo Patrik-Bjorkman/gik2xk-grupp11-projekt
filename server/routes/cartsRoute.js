@@ -37,18 +37,11 @@ router.post('/addProduct', (req, res) => {
 	});
 });
 
-router.put('/:id', (req, res) => {
-	const cart = req.body;
-	const id = req.params.id;
-	cartService.update(cart, id).then((result) => {
-		res.status(result.status).json(result.data);
-	});
-});
-
 router.put('/reduceAmount', (req, res) => {
 	const userId = req.body.userId;
 	const productId = req.body.productId;
-	cartService.reduceAmount(userId, productId).then((result) => {
+	console.log('userId:', userId, 'productId:', productId);
+	cartService.reduceAmount(1, productId).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });
@@ -66,6 +59,14 @@ router.put('/updateCartRow', (req, res) => {
 	const productId = req.body.productId;
 	const amount = req.body.amount;
 	cartService.updateCartRow(userId, productId, amount).then((result) => {
+		res.status(result.status).json(result.data);
+	});
+});
+
+router.put('/:id', (req, res) => {
+	const cart = req.body;
+	const id = req.params.id;
+	cartService.update(cart, id).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });

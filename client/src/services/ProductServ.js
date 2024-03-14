@@ -117,3 +117,23 @@ export async function addRating(productId, rating) {
 		console.error('Error in addRating:', e?.response ? e.response.data : e);
 	}
 }
+
+export async function removeRating(productId, ratingId) {
+	try {
+		const response = await axios.delete(
+			`/products/${productId}/destroyRating`,
+			{
+				data: { ratingId },
+			}
+		);
+
+		if (response.status === 200) {
+			return response.data;
+		} else {
+			console.log(response);
+			return {};
+		}
+	} catch (e) {
+		console.error('Error in removeRating:', e?.response ? e.response.data : e);
+	}
+}

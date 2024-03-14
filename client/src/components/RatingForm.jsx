@@ -27,18 +27,17 @@ function RatingForm({ productId, open, onClose, onRatingSubmitted }) {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const ratingData = {
-			rating: parseInt(value, 10), // Ensure rating is an integer
+			rating: parseInt(value, 10),
 			comment: comment,
 		};
 
 		addRating(productId, ratingData)
 			.then(() => {
-				console.log(`Rating and comment submitted: ${value} and ${comment}`);
-				onRatingSubmitted(); // Notify parent component
-				onClose(); // Close the dialog after successful submission
+				onRatingSubmitted();
+				onClose();
 			})
 			.catch((error) => {
-				console.error('Failed to add rating', error);
+				console.error('Misslyckades att lägga till betyg', error);
 			});
 	};
 	return (
@@ -47,13 +46,12 @@ function RatingForm({ productId, open, onClose, onRatingSubmitted }) {
 				open={open}
 				TransitionComponent={Transition}
 				keepMounted
-				onClose={onClose} // Use passed onClose prop here
+				onClose={onClose}
 				aria-describedby='alert-dialog-slide-description'
 			>
 				<DialogTitle>{'Sätt betyg'}</DialogTitle>
 				<form onSubmit={handleSubmit}>
 					{' '}
-					{/* Wrap dialog content in a form */}
 					<DialogContent>
 						<Rating
 							name='simple-controlled'
@@ -96,8 +94,7 @@ function RatingForm({ productId, open, onClose, onRatingSubmitted }) {
 									type='submit'
 								>
 									Skapa
-								</Button>{' '}
-								{/* Use type="submit" to submit the form */}
+								</Button>
 							</Box>
 						</Container>
 					</DialogActions>

@@ -12,7 +12,7 @@ function ProductItemSmall({ product }) {
 						component='img'
 						image={product.imageUrl || placeholderImage}
 						alt={product.title}
-						sx={{ maxWidth: '50%' }}
+						sx={{ maxWidth: '30%' }}
 					/>
 				</Link>
 				<Link to={`/products/${product.id}`}>

@@ -1,19 +1,38 @@
-import { Typography, Rating, Paper, Container, Box } from '@mui/material';
+import {
+	Typography,
+	Rating,
+	Paper,
+	Container,
+	Box,
+	Chip,
+	Card,
+} from '@mui/material';
 import ProductRatingList from './ProductRatingList';
+import { removeRating } from '../services/ProductServ';
 
 function ProductRating({ productId, refreshTrigger }) {
-	// Adjusted to use the custom hook, passing in productId and refreshTrigger
 	const productRatings = ProductRatingList({ productId, refreshTrigger });
+
+	function onRatingDelete(rating) {
+		console.log('Delete rating', rating);
+		removeRating(productId, rating.id);
+	}
 
 	return (
 		<Paper sx={{ my: 4, p: 4 }}>
 			{productRatings.map((rating, index) => (
-				<div key={index}>
+				<Card key={index} elevation={5} sx={{ m: 1, p: 1 }}>
 					<Container>
-						<Box display='flex' justifyContent='space-between' mb={4}>
-							{/* <Typography sx={{ mt: 2 }} component='legend'>
-						Betyg
-					</Typography> */}
+						<Box
+							display='flex'
+							justifyContent='space-between'
+							alignItems={'center'}
+						>
+							<Chip
+								onDelete={() => onRatingDelete(rating)}
+								key={rating.rating}
+								label={rating.rating}
+							/>
 							<Rating
 								name={`read-only-${index}`}
 								value={rating.rating}
@@ -22,12 +41,12 @@ function ProductRating({ productId, refreshTrigger }) {
 							<Typography variant='body1'>
 								Kommentar: {rating.comment || 'Ingen kommentar'}
 							</Typography>
-							<Typography sx={{ mb: 3 }} variant='body2' color='textSecondary'>
+							<Typography variant='body2' color='textSecondary'>
 								Skapad: {new Date(rating.createdAt).toLocaleDateString()}
 							</Typography>
 						</Box>
 					</Container>
-				</div>
+				</Card>
 			))}
 		</Paper>
 	);
