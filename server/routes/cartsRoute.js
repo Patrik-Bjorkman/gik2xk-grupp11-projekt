@@ -7,16 +7,16 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.get('/:id', (req, res) => {
-	const id = req.params.id;
-	cartService.getById(id).then((result) => {
+router.get('/getCartRows', (req, res) => {
+	const userId = req.query.userId;
+	cartService.getCartRows(userId).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });
 
-router.get('/:id/getCartRows', (req, res) => {
+router.get('/:id', (req, res) => {
 	const id = req.params.id;
-	cartService.getCartRows(id).then((result) => {
+	cartService.getById(id).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });
@@ -28,12 +28,11 @@ router.post('/', (req, res) => {
 	});
 });
 
-router.post('/:id/addProduct', (req, res) => {
+router.post('/addProduct', (req, res) => {
 	const productId = req.body.productId;
-	const cartId = req.params.id;
 	const userId = req.body.userId;
 	const amount = req.body.amount;
-	cartService.addProduct(cartId, userId, productId, amount).then((result) => {
+	cartService.addProduct(userId, productId, amount).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });
@@ -46,11 +45,27 @@ router.put('/:id', (req, res) => {
 	});
 });
 
-router.put('/:id/updateCartRow', (req, res) => {
-	const id = req.params.id;
+router.put('/reduceAmount', (req, res) => {
+	const userId = req.body.userId;
+	const productId = req.body.productId;
+	cartService.reduceAmount(userId, productId).then((result) => {
+		res.status(result.status).json(result.data);
+	});
+});
+
+router.put('/increaseAmount', (req, res) => {
+	const userId = req.body.userId;
+	const productId = req.body.productId;
+	cartService.increaseAmount(userId, productId).then((result) => {
+		res.status(result.status).json(result.data);
+	});
+});
+
+router.put('/updateCartRow', (req, res) => {
+	const userId = req.body.userId;
 	const productId = req.body.productId;
 	const amount = req.body.amount;
-	cartService.updateCartRow(id, productId, amount).then((result) => {
+	cartService.updateCartRow(userId, productId, amount).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });

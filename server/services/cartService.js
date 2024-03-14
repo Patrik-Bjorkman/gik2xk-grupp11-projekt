@@ -8,7 +8,7 @@ const {
 
 async function getAll() {
 	try {
-		const allCarts = await db.cart.findAll({});
+		const allCarts = await db.cart.findAll();
 		return createResponseSuccess(allCarts);
 	} catch (error) {
 		return createResponseError(error.status, error.message);
@@ -24,20 +24,17 @@ async function getById(id) {
 	}
 }
 
-async function getCartRows(id) {
-	try {
-		const cartRows = await db.cartRow.findAll({
-			where: {
-				cartId: id,
-			},
-		});
-		return createResponseSuccess(cartRows);
-	} catch (error) {
-		return createResponseError(error.status, error.message);
-	}
+async function getCartRows(userId) {
+	const cart = await db.cart.findOne({ where: { userId: userId } });
+	console.log(cart);
+	const cartRows = await db.cartRow.findAll({
+		where: { cartId: cart.id },
+		include: [db.product],
+	});
+	return createResponseSuccess(cartRows);
 }
 
-async function addProduct(cartId, userId, productId, amount) {
+async function addProduct(userId, productId, amount) {
 	if (!userId) {
 		return createResponseError(422, 'AnvändarId är obligatoriskt');
 	}
@@ -52,9 +49,9 @@ async function addProduct(cartId, userId, productId, amount) {
 		defaults: { userId: userId },
 	});
 	console.log(cart, created);
-	// Försök hitta en befintlig cartRow med cartId och productId
+
 	const existingCartRow = await db.cartRow.findOne({
-		where: { cartId: cartId, productId: productId },
+		where: { cartId: cart.id, productId: productId },
 	});
 
 	if (existingCartRow) {
@@ -70,7 +67,7 @@ async function addProduct(cartId, userId, productId, amount) {
 			// Se till att amount är ett tal
 			const newAmount = parseInt(amount, 10);
 			const newCartRow = await db.cartRow.create({
-				cartId: cartId,
+				cartId: cart.id,
 				productId: productId,
 				amount: newAmount,
 			});
@@ -111,6 +108,78 @@ async function update(cart, id) {
 			},
 		});
 		return createResponseMessage(200, 'Varukorgen uppdaterades');
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
+async function reduceAmount(userId, productId) {
+	if (!userId) {
+		return createResponseError(422, 'AnvändarId är obligatoriskt');
+	}
+	if (!productId) {
+		return createResponseError(422, 'ProduktId är obligatoriskt');
+	}
+	try {
+		const cart = await db.cart.findOne({
+			where: {
+				userId,
+			},
+		});
+		if (!cart) {
+			return createResponseError(404, 'Varukorgen hittades inte');
+		}
+		const cartRow = await db.cartRow.findOne({
+			where: {
+				cartId: cart.id,
+				productId,
+			},
+		});
+		if (!cartRow) {
+			return createResponseError(404, 'Varukorgsraden hittades inte');
+		}
+		if (cartRow.amount > 1) {
+			cartRow.amount -= 1;
+			const saveResult = await cartRow.save();
+			console.log('Save result:', saveResult);
+		} else {
+			const destroyResult = await cartRow.destroy();
+			console.log('Destroy result:', destroyResult);
+		}
+		return createResponseSuccess(cartRow);
+	} catch (error) {
+		return createResponseError(error.status, error.message);
+	}
+}
+
+async function increaseAmount(userId, productId) {
+	if (!userId) {
+		return createResponseError(422, 'AnvändarId är obligatoriskt');
+	}
+	if (!productId) {
+		return createResponseError(422, 'ProduktId är obligatoriskt');
+	}
+	try {
+		const cart = await db.cart.findOne({
+			where: {
+				userId,
+			},
+		});
+		if (!cart) {
+			return createResponseError(404, 'Varukorgen hittades inte');
+		}
+		const cartRow = await db.cartRow.findOne({
+			where: {
+				cartId: cart.id,
+				productId,
+			},
+		});
+		if (!cartRow) {
+			return createResponseError(404, 'Varukorgsraden hittades inte');
+		}
+		cartRow.amount += 1;
+		await cartRow.save();
+		return createResponseSuccess(cartRow);
 	} catch (error) {
 		return createResponseError(error.status, error.message);
 	}
@@ -187,6 +256,8 @@ module.exports = {
 	create,
 	addProduct,
 	update,
+	reduceAmount,
+	increaseAmount,
 	updateCartRow,
 	destroyCartRow,
 	destroy,

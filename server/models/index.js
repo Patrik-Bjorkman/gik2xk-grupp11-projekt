@@ -53,6 +53,14 @@ db.product.hasMany(db.rating, {
 	onDelete: 'CASCADE',
 });
 
+db.cartRow.belongsTo(db.product, { foreignKey: 'product_id' });
+
+db.product.hasMany(db.cartRow, { foreignKey: 'product_id' });
+
+db.cartRow.belongsTo(db.cart, { foreignKey: 'cart_id' });
+
+db.cart.hasMany(db.cartRow, { foreignKey: 'cart_id' });
+
 db.product.belongsToMany(db.cart, { through: db.cartRow });
 db.cart.belongsToMany(db.product, { through: db.cartRow });
 

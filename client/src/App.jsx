@@ -12,11 +12,20 @@ function App() {
 						<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
 							<Link to='/'>Webbshop</Link>
 						</Typography>
-						<Button   color='secondary' variant="contained"startIcon={<SaveAsIcon />}>
+						<Button
+							color='secondary'
+							variant='contained'
+							startIcon={<SaveAsIcon />}
+						>
 							<Link to='/products/new'>Skapa Produkt</Link>
 						</Button>
-						<Button sx={{ m: 2 }} color='success' variant='contained' startIcon={<ShoppingCartIcon />}>
-							<Link to='/carts/1'>Kundvagn</Link>
+						<Button
+							sx={{ m: 2 }}
+							color='success'
+							variant='contained'
+							startIcon={<ShoppingCartIcon />}
+						>
+							<Link to='/carts/new'>Kundvagn</Link>
 						</Button>
 					</Toolbar>
 				</AppBar>
