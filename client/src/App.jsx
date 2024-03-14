@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Typography, Container } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 
@@ -30,7 +30,9 @@ function App() {
 					</Toolbar>
 				</AppBar>
 			</Box>
+			<Container component="footer" sx={{ mt: 4 }} maxWidth="xl">
 			<Outlet />
+		</Container>
 		</>
 	);
 }

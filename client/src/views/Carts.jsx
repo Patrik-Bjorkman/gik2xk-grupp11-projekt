@@ -1,4 +1,4 @@
-import { Box, Button, CardMedia, Container, Typography } from '@mui/material';
+import { Box, Button, CardMedia, Container, Typography} from '@mui/material';
 import { getCart, reduceAmount, increaseAmount } from '../services/CartService';
 import { useEffect, useState } from 'react';
 import placeholderImage from '../assets/placeholder.png';
@@ -33,9 +33,10 @@ function Carts() {
 			{cart ? (
 				<div>
 					{cart.map((cartRows) => (
+
 						<Container key={cartRows.id}>
-							<Box sx={{ mb: 3 }}>
-								<CardMedia
+							<Box sx={{ mb: 4 }}>
+								<CardMedia 
 									component='img'
 									image={cartRows.product.imageUrl || placeholderImage}
 									alt={cartRows.product.title}

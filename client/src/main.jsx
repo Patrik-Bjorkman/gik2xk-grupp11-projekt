@@ -16,7 +16,7 @@ const theme = createTheme({
 		mode: 'light',
 		background: {
 			default: '#f3f3f3',
-			paper: grey[50],
+			paper: grey[80],
 		},
 		primary: {
 			main: blue[900],
@@ -28,7 +28,7 @@ const theme = createTheme({
 			main: teal[300],
 		},
 	},
-	body1: { color: blueGrey[700] },
+	body1: { color: blueGrey[500] },
 	body2: { color: blueGrey[800] },
 });
 
