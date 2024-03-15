@@ -13,6 +13,7 @@ function ProductEdit() {
 		id: 0,
 		title: '',
 		description: '',
+		price: 0,
 		imageUrl: '',
 		userId: 2,
 	};
@@ -21,12 +22,11 @@ function ProductEdit() {
 	useEffect(() => {
 		if (id) {
 			getProduct(id).then((product) => {
-				// Ensure all fields have a default value if fetchedProduct has undefined fields
 				const safeProduct = {
 					title: '',
 					description: '',
 					imageUrl: '',
-					tags: [],
+					price: 0,
 					userId: 2,
 					...product,
 				};
@@ -69,10 +69,10 @@ function ProductEdit() {
 	return product ? (
 		<>
 			<Container maxWidth='lg'>
-				<Typography variant='h4' component='h2'>
+				<Typography variant='h4' component='h2' sx={{ mt: 2 }}>
 					{product.id ? 'Ändra Produkt' : 'Skapa Produkt'}
 				</Typography>
-				<Box mt={4}>
+				<Box mt={2}>
 					<form>
 						<Box>
 							<TextField

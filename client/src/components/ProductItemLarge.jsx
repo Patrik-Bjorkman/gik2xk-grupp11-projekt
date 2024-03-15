@@ -8,6 +8,7 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
+	Divider,
 } from '@mui/material';
 import placeholderImage from '../assets/placeholder.png';
 import AverageRating from './AverageRating';
@@ -29,16 +30,22 @@ function ProductItemLarge({ product }) {
 
 	return (
 		<>
-			<Card elevation={0} sx={{ maxWidth: '50%' }}>
-				<Typography variant='h2'>{product.title}</Typography>
-				<CardMedia
-					component='img'
-					alt={product.title}
-					sx={{ maxWidth: '40%' }}
-					image={product.imageUrl || placeholderImage}
-				/>
-				<Typography>{product.description}</Typography>
-				<Typography>{product.price} kr</Typography>
+			<Card elevation={0} sx={{ ml: 2 }}>
+				<Typography textAlign={'center'} variant='h3'>
+					{product.title}
+				</Typography>
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<CardMedia
+						component='img'
+						alt={product.title}
+						sx={{ maxWidth: '40%', display: 'inline' }}
+						image={product.imageUrl || placeholderImage}
+					/>
+				</Box>
+				<Typography textAlign={'center'}>{product.description}</Typography>
+				<Divider sx={{ my: 5 }} />
+				<Typography variant='h3'>{product.price} kr</Typography>
+				<Divider sx={{ my: 5 }} />
 				<Box sx={{ mt: 2, mb: 2 }}>
 					<AverageRating
 						productId={product.id}

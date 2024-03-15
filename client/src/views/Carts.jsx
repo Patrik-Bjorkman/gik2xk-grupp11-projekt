@@ -1,4 +1,11 @@
-import { Box, Button, CardMedia, Container, Typography } from '@mui/material';
+import {
+	Box,
+	Button,
+	CardMedia,
+	Container,
+	Divider,
+	Typography,
+} from '@mui/material';
 import { getCart, reduceAmount, increaseAmount } from '../services/CartService';
 import { useEffect, useState } from 'react';
 import placeholderImage from '../assets/placeholder.png';
@@ -31,7 +38,11 @@ function Carts() {
 
 	return (
 		<>
-			<Typography>Varukorg</Typography>
+			<Container>
+				<Typography variant='h3' sx={{ mt: 2 }}>
+					Varukorg
+				</Typography>
+			</Container>
 			{cart ? (
 				<div>
 					{cart.map((cartRows) => (
@@ -72,7 +83,8 @@ function Carts() {
 
 					<Container>
 						<Box>
-							<Typography variant='h4' component='h2'>
+							<Divider sx={{ mt: 3, mb: 2, borderColor: 'primary.main' }} />
+							<Typography variant='h4' component='h2' sx={{ m: 5 }}>
 								Totalt:{' '}
 								{cart
 									.reduce((acc, row) => acc + row.product.price * row.amount, 0)
@@ -80,24 +92,24 @@ function Carts() {
 								kr
 							</Typography>
 						</Box>
+						<Box display={'flex'} justifyContent={'space-between'}>
+							<Button
+								variant='contained'
+								color='secondary'
+								startIcon={<ChevronLeftIcon />}
+								onClick={() => navigate(-1)}
+							>
+								Tillbaka
+							</Button>
+							<Button
+								variant='contained'
+								color='success'
+								startIcon={<ShoppingCartCheckoutIcon />}
+							>
+								Slutför köp
+							</Button>
+						</Box>
 					</Container>
-					<Button
-						variant='contained'
-						color='secondary'
-						startIcon={<ChevronLeftIcon />}
-						sx={{ m: 2 }}
-						onClick={() => navigate(-1)}
-					>
-						Tillbaka
-					</Button>
-					<Button
-						variant='contained'
-						color='success'
-						startIcon={<ShoppingCartCheckoutIcon />}
-						sx={{ m: 2 }}
-					>
-						Slutför köp
-					</Button>
 				</div>
 			) : (
 				<h3>Kunde inte hämta varukorg</h3>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getProduct } from '../services/ProductServ';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Card, Button } from '@mui/material';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Card, Button, Alert } from '@mui/material';
 import ProductItemLarge from '../components/ProductItemLarge';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -16,26 +16,71 @@ function ProductDetail() {
 
 	const [product, setProduct] = useState(null);
 
+	const [alert, setAlert] = useState({
+		open: false,
+		message: '',
+		severity: 'success',
+	});
+
 	const handleClickBuy = async () => {
-		console.log(id);
 		try {
-			const data = await addProductToCart(id, userId);
-			console.log('Produkten har lagts till i varukorgen:', data);
+			await addProductToCart(id, userId);
+			// On success, show a success message
+			setAlert({
+				open: true,
+				message: 'Produkten har lagts till i varukorgen!',
+				severity: 'success',
+			});
 		} catch (error) {
 			console.error('Något gick fel:', error);
+			// On error, show an error message
+			setAlert({
+				open: true,
+				message: 'Något gick fel när produkten skulle läggas till.',
+				severity: 'error',
+			});
 		}
-
-		addProductToCart(id, 2);
 	};
 
 	useEffect(() => {
 		getProduct(id).then((product) => setProduct(product));
 	}, [id]);
+
+	const location = useLocation();
+	const message = location.state?.message;
+	const [open, setOpen] = useState(true);
+
+	function clearMessage() {
+		window.history.replaceState({}, '');
+	}
 	return (
 		<>
+			{message && open && (
+				<Alert
+					onClose={() => {
+						setOpen(false);
+						clearMessage();
+					}}
+					variant='filled'
+					severity='success'
+					sx={{ m: 2 }}
+				>
+					{message}
+				</Alert>
+			)}
+			{alert.open && (
+				<Alert
+					onClose={() => setAlert({ ...alert, open: false })}
+					variant='filled'
+					severity={alert.severity}
+					sx={{ m: 2 }}
+				>
+					{alert.message}
+				</Alert>
+			)}
 			<Card>
 				{product ? (
-					<Grid container>
+					<Grid container justifyContent='center' spacing={2}>
 						<Card component='section'>
 							<Paper elevation={8} sx={{ p: 2, mt: 4 }}>
 								<ProductItemLarge product={product} />

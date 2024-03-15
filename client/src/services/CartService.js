@@ -35,7 +35,6 @@ export async function addProductToCart(productId, userId, amount = 1) {
 
 export async function reduceAmount(userId, productId) {
 	try {
-		console.log('userId:', userId, 'productId:', productId);
 		const response = await axios.put(`/carts/reduceAmount/`, {
 			userId,
 			productId,
