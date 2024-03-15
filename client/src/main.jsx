@@ -9,41 +9,40 @@ import Carts from './views/Carts.jsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { blueGrey, teal, grey, blue, } from '@mui/material/colors';
+import { blueGrey, teal, grey, blue } from '@mui/material/colors';
 
 const theme = createTheme({
-		palette: {
-		  mode: 'light',
-		  background: {
+	palette: {
+		mode: 'light',
+		background: {
 			default: '#f3f3f3',
-			paper: grey[80],
-		  },
-		  primary: {
-			main: blue[900],
-		  },
-		  secondary: {
-			main: blue[200],
-		  },
-		  success: {
-			main: teal[500],
-		  },
+			paper: grey[100],
 		},
-		typography: {
-		  h6: {
-			fontSize: '1.7rem',
-			color: 'white',
-			fontWeight: 'bold',
-		  },
-		  h5: {
-			fontSize: '1.5rem',
-			color: 'black',
-			
-		  },
-	body1: { color: blueGrey[500] },
-	body2: { color: blueGrey[800] },
+		primary: {
+			main: blue[900],
+		},
+		secondary: {
+			main: blue[200],
+		},
+		success: {
+			main: teal[500],
+		},
 	},
-})
-
+	typography: {
+		fontFamily: 'Madimi One, cursive',
+		h1: {
+			fontFamily: 'Bebas Neue',
+		},
+		h3: { fontFamily: 'Bebas Neue' },
+		h5: {
+			fontFamily: 'Madimi One',
+			fontSize: '2rem',
+			color: 'black',
+		},
+		body1: { color: blueGrey[500] },
+		body2: { color: blueGrey[800] },
+	},
+});
 
 const router = createBrowserRouter([
 	{

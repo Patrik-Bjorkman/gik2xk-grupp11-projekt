@@ -1,11 +1,15 @@
-import { Box, Button, CardMedia, Container, Typography} from '@mui/material';
+import { Box, Button, CardMedia, Container, Typography } from '@mui/material';
 import { getCart, reduceAmount, increaseAmount } from '../services/CartService';
 import { useEffect, useState } from 'react';
 import placeholderImage from '../assets/placeholder.png';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import { Link, useNavigate } from 'react-router-dom';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
 function Carts() {
+	const navigate = useNavigate();
 	const userId = 1;
 
 	const [cart, setCart] = useState(null);
@@ -15,7 +19,6 @@ function Carts() {
 
 	const handleReduceAmount = async (userId, productId) => {
 		await reduceAmount(userId, productId);
-		console.log('userId:', userId, 'productId:', productId);
 		const updatedCart = await getCart(userId);
 		setCart(updatedCart);
 	};
@@ -23,7 +26,6 @@ function Carts() {
 	const handleIncreaseAmount = async (userId, productId) => {
 		await increaseAmount(userId, productId);
 		const updatedCart = await getCart(userId);
-		console.log('userId:', userId, 'productId:', productId);
 		setCart(updatedCart);
 	};
 
@@ -33,16 +35,17 @@ function Carts() {
 			{cart ? (
 				<div>
 					{cart.map((cartRows) => (
-
 						<Container key={cartRows.id}>
 							<Box sx={{ mb: 4 }}>
-								<CardMedia 
-									component='img'
-									image={cartRows.product.imageUrl || placeholderImage}
-									alt={cartRows.product.title}
-									sx={{ maxWidth: '10%' }}
-								/>
-								<Typography>Produkt: {cartRows.product.title}</Typography>
+								<Link to={`/products/${cartRows.product.id}`}>
+									<CardMedia
+										component='img'
+										image={cartRows.product.imageUrl || placeholderImage}
+										alt={cartRows.product.title}
+										sx={{ maxWidth: '10%' }}
+									/>
+									<Typography>Produkt: {cartRows.product.title}</Typography>
+								</Link>
 								<Typography>Pris: {cartRows.product.price} kr</Typography>
 								<Typography>Antal: {cartRows.amount}</Typography>
 								<Typography>
@@ -71,14 +74,30 @@ function Carts() {
 						<Box>
 							<Typography variant='h4' component='h2'>
 								Totalt:{' '}
-								{cart.reduce(
-									(acc, row) => acc + row.product.price * row.amount,
-									0
-								)}{' '}
+								{cart
+									.reduce((acc, row) => acc + row.product.price * row.amount, 0)
+									.toFixed(2)}{' '}
 								kr
 							</Typography>
 						</Box>
 					</Container>
+					<Button
+						variant='contained'
+						color='secondary'
+						startIcon={<ChevronLeftIcon />}
+						sx={{ m: 2 }}
+						onClick={() => navigate(-1)}
+					>
+						Tillbaka
+					</Button>
+					<Button
+						variant='contained'
+						color='success'
+						startIcon={<ShoppingCartCheckoutIcon />}
+						sx={{ m: 2 }}
+					>
+						Slutför köp
+					</Button>
 				</div>
 			) : (
 				<h3>Kunde inte hämta varukorg</h3>

@@ -10,12 +10,14 @@ import {
 import ProductRatingList from './ProductRatingList';
 import { removeRating } from '../services/ProductServ';
 
-function ProductRating({ productId, refreshTrigger }) {
+function ProductRating({ productId, refreshTrigger, onRatingDeleted }) {
 	const productRatings = ProductRatingList({ productId, refreshTrigger });
 
 	function onRatingDelete(rating) {
 		console.log('Delete rating', rating);
-		removeRating(productId, rating.id);
+		removeRating(productId, rating.id).then(() => {
+			onRatingDeleted();
+		});
 	}
 
 	return (

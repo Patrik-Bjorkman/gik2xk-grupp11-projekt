@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-a, a:hover {
-    text-decoration: none;
-    color: inherit;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Madimi+One&display=swap');
+a,
+a:hover {
+	text-decoration: none;
+	color: inherit;
 }
 
 ul {
-    padding: 0;
-
+	padding: 0;
 }
-li{
-    list-style: none;
+li {
+	list-style: none;
 }

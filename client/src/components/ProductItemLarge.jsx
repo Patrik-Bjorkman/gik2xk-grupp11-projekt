@@ -16,17 +16,15 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import RatingForm from './RatingForm';
 
 function ProductItemLarge({ product }) {
-	const [open, setOpen] = useState(false); // Controls the visibility of the RatingForm dialog
-	const [refreshRating, setRefreshRating] = useState(false); // Triggers re-fetching of ratings
+	const [open, setOpen] = useState(false);
+	const [refreshRating, setRefreshRating] = useState(false);
 
-	// Handler for opening the RatingForm dialog
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
 
-	// Handler for when a new rating is successfully submitted
-	const handleRatingSubmitted = () => {
-		setRefreshRating((prev) => !prev); // Toggle the state to trigger re-fetching of ratings
+	const handleRatingUpdate = () => {
+		setRefreshRating((prev) => !prev);
 	};
 
 	return (
@@ -59,7 +57,7 @@ function ProductItemLarge({ product }) {
 						productId={product.id}
 						open={open}
 						onClose={() => setOpen(false)}
-						onRatingSubmitted={handleRatingSubmitted}
+						onRatingSubmitted={handleRatingUpdate}
 					/>
 					<Accordion sx={{ mt: 2 }} variant='outlined'>
 						<AccordionSummary
@@ -73,6 +71,7 @@ function ProductItemLarge({ product }) {
 							<ProductRating
 								productId={product.id}
 								refreshTrigger={refreshRating}
+								onRatingDeleted={handleRatingUpdate}
 							/>
 						</AccordionDetails>
 					</Accordion>

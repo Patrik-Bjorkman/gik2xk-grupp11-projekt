@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getProduct } from '../services/ProductServ';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Card, Button, Box } from '@mui/material';
+import { Card, Button } from '@mui/material';
 import ProductItemLarge from '../components/ProductItemLarge';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -36,23 +36,21 @@ function ProductDetail() {
 			<Card>
 				{product ? (
 					<Grid container>
-						<Card component="section" item xs={12} md={8}>
+						<Card component='section'>
 							<Paper elevation={8} sx={{ p: 2, mt: 4 }}>
-							<ProductItemLarge product={product} />
+								<ProductItemLarge product={product} />
 							</Paper>
-					</Card>
+						</Card>
 					</Grid>
 				) : (
 					<h3>Loading...</h3>
 				)}
-				<Button 
+				<Button
 					variant='contained'
 					color='secondary'
 					startIcon={<ChevronLeftIcon />}
 					sx={{ m: 2 }}
 					onClick={() => navigate(-1)}
-					
-					
 				>
 					Tillbaka
 				</Button>
@@ -64,7 +62,7 @@ function ProductDetail() {
 				>
 					Ändra
 				</Button>
-				<Button 
+				<Button
 					startIcon={<AddShoppingCartIcon />}
 					variant='contained'
 					color='success'
