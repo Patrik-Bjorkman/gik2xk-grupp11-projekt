@@ -82,7 +82,7 @@ function ProductDetail() {
 				{product ? (
 					<Grid container justifyContent='center' spacing={2}>
 						<Card component='section'>
-							<Paper elevation={8} sx={{ p: 2, mt: 4 }}>
+							<Paper elevation={8} sx={{ p: 4, mt: 5, }}>
 								<ProductItemLarge product={product} />
 							</Paper>
 						</Card>

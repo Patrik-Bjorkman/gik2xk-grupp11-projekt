@@ -9,7 +9,7 @@ import Carts from './views/Carts.jsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { blueGrey, teal, grey, blue } from '@mui/material/colors';
+import { blueGrey, teal, grey, blue, red} from '@mui/material/colors';
 
 const theme = createTheme({
 	palette: {
@@ -19,7 +19,7 @@ const theme = createTheme({
 			paper: grey[100],
 		},
 		primary: {
-			main: blue[900],
+			main: blue[700],
 		},
 		secondary: {
 			main: blue[200],
@@ -32,15 +32,18 @@ const theme = createTheme({
 		fontFamily: 'Madimi One, cursive',
 		h1: {
 			fontFamily: 'Bebas Neue',
+			textShadow: '4px 4px 6px #000000',
 		},
-		h3: { fontFamily: 'Bebas Neue' },
+		h3: { fontFamily: 'Bebas Neue' 
+	},
 		h5: {
 			fontFamily: 'Madimi One',
 			fontSize: '2rem',
 			color: 'black',
+			textShadow: '1px 1px 2px #000000',
 		},
 		body1: { color: blueGrey[500] },
-		body2: { color: blueGrey[800] },
+		body2: { color: red[800] },
 	},
 });
 

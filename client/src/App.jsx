@@ -18,7 +18,7 @@ function App() {
 	return (
 		<>
 			<Box sx={{ flexGrow: 1 }}>
-				<AppBar position='static' sx={{ borderRadius: 2 }}>
+				<AppBar position='static' sx={{ borderRadius: 4 }}>
 					<Toolbar>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={12} md={6}>
