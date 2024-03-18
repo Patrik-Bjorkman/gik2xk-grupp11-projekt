@@ -39,7 +39,7 @@ function Carts() {
 	return (
 		<>
 			<Container>
-				<Typography variant='h3' sx={{ mt: 4, mb: 2, }}>
+				<Typography variant='h3' sx={{ mt: 4, mb: 2 }}>
 					Varukorg
 				</Typography>
 				<Divider sx={{ mt: 2, mb: 4, borderColor: 'primary.main' }} />
@@ -54,7 +54,7 @@ function Carts() {
 										component='img'
 										image={cartRows.product.imageUrl || placeholderImage}
 										alt={cartRows.product.title}
-										sx={{ maxWidth: '10%', mb: 2, }}
+										sx={{ maxWidth: '10%', mb: 2 }}
 									/>
 									<Typography>Produkt: {cartRows.product.title}</Typography>
 								</Link>
@@ -113,7 +113,7 @@ function Carts() {
 					</Container>
 				</div>
 			) : (
-				<h3>Kunde inte hämta varukorg</h3>
+				<Typography variant='h6'>Kunde inte hämta varukorg</Typography>
 			)}
 		</>
 	);

@@ -187,5 +187,4 @@ module.exports = {
 	updateRating,
 	destroyRating,
 	destroy,
-	// addToCart,
 };

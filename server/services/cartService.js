@@ -26,7 +26,9 @@ async function getById(id) {
 
 async function getCartRows(userId) {
 	const cart = await db.cart.findOne({ where: { userId: userId } });
-	console.log(cart);
+	if (!cart) {
+		return createResponseMessage(202, 'Varukorgen finns inte!');
+	}
 	const cartRows = await db.cartRow.findAll({
 		where: { cartId: cart.id },
 		include: [db.product],
@@ -55,16 +57,13 @@ async function addProduct(userId, productId, amount) {
 	});
 
 	if (existingCartRow) {
-		// Konvertera både existingCartRow.amount och amount till tal innan addition
 		const updatedAmount =
 			parseInt(existingCartRow.amount, 10) + parseInt(amount, 10);
 		existingCartRow.amount = updatedAmount;
 		await existingCartRow.save();
 		return createResponseSuccess(existingCartRow);
 	} else {
-		// Om ingen cartRow finns, skapa en ny
 		try {
-			// Se till att amount är ett tal
 			const newAmount = parseInt(amount, 10);
 			const newCartRow = await db.cartRow.create({
 				cartId: cart.id,
@@ -73,18 +72,12 @@ async function addProduct(userId, productId, amount) {
 			});
 			return createResponseSuccess(newCartRow);
 		} catch (error) {
-			// Hantera andra möjliga fel
 			return createResponseError(error.status || 500, error.message);
 		}
 	}
 }
 
 async function create(cart) {
-	// const invalidData = validate(cart);
-
-	// if (invalidData) {
-	// 	return createResponseError(422, invalidData);
-	// }
 	try {
 		const newCart = await db.cart.create(cart);
 		return createResponseSuccess(newCart);

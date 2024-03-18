@@ -3,7 +3,6 @@ a,
 a:hover {
 	text-decoration: none;
 	color: inherit;
-
 }
 
 ul {
@@ -13,21 +12,19 @@ li {
 	list-style: none;
 }
 @keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 .customAppBar {
 	color: white;
-    background: linear-gradient(to right, #ff0000, #000000, #ffeeeecf);
-    background-size: 200% auto;
-    animation: gradientAnimation 10s linear infinite;
-	border-radius: 4px;
+	background: linear-gradient(30deg, #51d6ff, #000000, #ffeeeecf);
+	background-size: 400% 400%;
+	animation: gradientAnimation 20s ease infinite;
 }
-	

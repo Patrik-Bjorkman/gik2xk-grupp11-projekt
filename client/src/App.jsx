@@ -15,13 +15,15 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import './index.css';
 
-
-
 function App() {
 	return (
 		<>
 			<Box sx={{ flexGrow: 1 }}>
-				<AppBar position='static' sx={{ borderRadius: 4,  }} class='customAppBar'>
+				<AppBar
+					position='static'
+					sx={{ borderRadius: 4 }}
+					className='customAppBar'
+				>
 					<Toolbar>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={12} md={6}>
