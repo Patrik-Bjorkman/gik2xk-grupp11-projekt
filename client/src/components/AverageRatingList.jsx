@@ -12,7 +12,7 @@ function AverageRatingList(productId, refreshTrigger) {
 			const average =
 				productRatings.reduce((acc, curr) => acc + curr.rating, 0) /
 				productRatings.length;
-			setAverageRating(average || 0); // Set to 0 if no ratings
+			setAverageRating(average || 0);
 		});
 	}, [productId, refreshTrigger]);
 

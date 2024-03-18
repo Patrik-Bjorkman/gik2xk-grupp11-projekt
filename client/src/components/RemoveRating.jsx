@@ -16,7 +16,7 @@ function RemoveRating(productId, refreshTrigger) {
 	const onRatingDelete = useCallback(
 		async (ratingId) => {
 			await removeRating(productId, ratingId);
-			fetchRatings(); // Refetch ratings after deletion
+			fetchRatings();
 		},
 		[productId, fetchRatings]
 	);

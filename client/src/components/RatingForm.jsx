@@ -72,8 +72,8 @@ function RatingForm({ productId, open, onClose, onRatingSubmitted }) {
 							type='text'
 							fullWidth
 							variant='standard'
-							value={comment} // Control this component with state
-							onChange={(e) => setComment(e.target.value)} // Update state on change
+							value={comment}
+							onChange={(e) => setComment(e.target.value)}
 						/>
 					</DialogContent>
 					<DialogActions>

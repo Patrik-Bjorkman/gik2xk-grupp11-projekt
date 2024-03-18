@@ -11,10 +11,10 @@ function ProductList({ pathname }) {
 		...theme.typography.body2,
 		padding: theme.spacing(2),
 		textAlign: 'center',
-		display: 'flex', // Add this line
-		flexDirection: 'column', // Add this line
-		justifyContent: 'space-between', // Add this line
-		height: '95%', // Modify this value if needed
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+		height: '95%',
 	}));
 	const [products, setProducts] = useState([]);
 

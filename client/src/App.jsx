@@ -139,9 +139,9 @@ function App() {
 							Om Webbshopen
 						</Typography>
 						<Typography variant='body2' color='textSecondary'>
-							Vår webbshop erbjuder det senaste inom elektronik och andra roliga
-							prylar. Vi strävar efter att ge våra kunder den bästa upplevelsen
-							och de bästa produkterna.
+							Vår webbshop erbjuder det senaste inom elektronik och andra
+							nödvändiga prylar. Vi strävar efter att ge våra kunder den bästa
+							upplevelsen och de bästa produkterna.
 						</Typography>
 					</Grid>
 				</Grid>

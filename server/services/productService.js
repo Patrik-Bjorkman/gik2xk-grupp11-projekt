@@ -12,11 +12,6 @@ const constraints = {
 			tooLong: '^Titeln får inte vara längre än %{count} tecken lång.',
 		},
 	},
-	imageUrl: {
-		url: {
-			message: '^Sökvägen är felaktig.',
-		},
-	},
 	rating: {
 		length: {
 			maximum: 1,
