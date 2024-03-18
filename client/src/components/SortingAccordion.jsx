@@ -35,7 +35,6 @@ const SortingAccordion = ({ onSort }) => {
 				</AccordionSummary>
 				<AccordionDetails>
 					<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-						{/* Buttons for sorting criteria */}
 						<Button onClick={() => handleSort('cheapest')}>Billigast</Button>
 						<Button onClick={() => handleSort('expensive')}>Dyrast</Button>
 						<Button onClick={() => handleSort('alphabeticala-z')}>

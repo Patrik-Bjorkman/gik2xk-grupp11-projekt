@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
 	Typography,
 	Rating,
@@ -7,11 +8,16 @@ import {
 	Chip,
 	Card,
 } from '@mui/material';
-import ProductRatingList from './ProductRatingList';
-import { removeRating } from '../services/ProductServ';
+import { getProductRatings, removeRating } from '../services/ProductServ';
 
 function ProductRating({ productId, refreshTrigger, onRatingDeleted }) {
-	const productRatings = ProductRatingList({ productId, refreshTrigger });
+	const [productRatings, setProductRatings] = useState([]);
+
+	useEffect(() => {
+		if (productId) {
+			getProductRatings(productId).then(setProductRatings);
+		}
+	}, [productId, refreshTrigger]);
 
 	function onRatingDelete(rating) {
 		console.log('Delete rating', rating);

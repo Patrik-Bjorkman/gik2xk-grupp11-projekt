@@ -1,27 +1,27 @@
-import { getProductRatings, removeRating } from '../services/ProductServ';
-import { useState, useEffect, useCallback } from 'react';
+// import { getProductRatings, removeRating } from '../services/ProductServ';
+// import { useState, useEffect, useCallback } from 'react';
 
-function RemoveRating(productId, refreshTrigger) {
-	const [productRatings, setProductRatings] = useState([]);
+// function RemoveRating(productId, refreshTrigger) {
+// 	const [productRatings, setProductRatings] = useState([]);
 
-	const fetchRatings = useCallback(async () => {
-		const ratings = await getProductRatings(productId);
-		setProductRatings(ratings);
-	}, [productId]);
+// 	const fetchRatings = useCallback(async () => {
+// 		const ratings = await getProductRatings(productId);
+// 		setProductRatings(ratings);
+// 	}, [productId]);
 
-	useEffect(() => {
-		fetchRatings();
-	}, [fetchRatings, productId, refreshTrigger]);
+// 	useEffect(() => {
+// 		fetchRatings();
+// 	}, [fetchRatings, productId, refreshTrigger]);
 
-	const onRatingDelete = useCallback(
-		async (ratingId) => {
-			await removeRating(productId, ratingId);
-			fetchRatings();
-		},
-		[productId, fetchRatings]
-	);
+// 	const onRatingDelete = useCallback(
+// 		async (ratingId) => {
+// 			await removeRating(productId, ratingId);
+// 			fetchRatings();
+// 		},
+// 		[productId, fetchRatings]
+// 	);
 
-	return { productRatings, onRatingDelete };
-}
+// 	return { productRatings, onRatingDelete };
+// }
 
-export default RemoveRating;
+// export default RemoveRating;

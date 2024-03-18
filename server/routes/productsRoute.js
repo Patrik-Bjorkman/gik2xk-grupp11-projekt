@@ -61,17 +61,17 @@ router.put('/:id/updateRating', (req, res) => {
 	});
 });
 
-router.delete('/:id/destroyRating', (req, res) => {
-	const productId = req.params.id;
-	const ratingId = req.body.ratingId;
-	productService.destroyRating(ratingId, productId).then((result) => {
+router.delete('/', (req, res) => {
+	const id = req.body.id;
+	productService.destroy(id).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });
 
-router.delete('/', (req, res) => {
-	const id = req.body.id;
-	productService.destroy(id).then((result) => {
+router.delete('/:id/destroyRating', (req, res) => {
+	const productId = req.params.id;
+	const ratingId = req.body.ratingId;
+	productService.destroyRating(ratingId, productId).then((result) => {
 		res.status(result.status).json(result.data);
 	});
 });
